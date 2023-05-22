@@ -4,8 +4,7 @@ import { client } from '../../lib/sanity.client'
 import { groq } from 'next-sanity'
 import NavbarSecond from '../../components/navbar_second'
 import Footer from '../../components/footer'
-import OdooSecondPage from '../../components/odoo_second_page'
-import OdooPage from '../../components/odoo_page'
+import MicrostrategyPage from '../../components/microstrategy_page'
 
 
 const font = Poppins({
@@ -15,30 +14,29 @@ const font = Poppins({
 
 
 
-const Home = ({carousel_odoo} : any) => {
+const Home = ({carousel_micro} : any) => {
   return (
     <main className={`flex min-h-screen bg-white flex-col items-center justify-between text-[#204E62] ${font.className}`}>
       <NavbarSecond />
-      <OdooPage data={carousel_odoo}/>
-      <OdooSecondPage />
+      <MicrostrategyPage data={carousel_micro}/>
       <Footer />
     </main>
   )
 }
 
 export const getServerSideProps = async () => {
-  const query_carousel_odoo= groq`
-    *[_type == "carousel_odoo"] {
+  const query_carousel_micro = groq`
+    *[_type == "carousel_micro"] {
       title,
       desc,
       "imgurl": image.asset->url
     }
   `
 
-const carousel_odoo = await client.fetch(query_carousel_odoo);
+const carousel_micro = await client.fetch(query_carousel_micro);
 
   return {
-    props: { carousel_odoo }
+    props: { carousel_micro }
   }
 }
 

@@ -4,8 +4,8 @@ import { client } from '../../lib/sanity.client'
 import { groq } from 'next-sanity'
 import NavbarSecond from '../../components/navbar_second'
 import Footer from '../../components/footer'
-import OdooSecondPage from '../../components/odoo_second_page'
-import OdooPage from '../../components/odoo_page'
+import EpicorSecondPage from '../../components/epicor_second_page'
+import EpicorPage from '../../components/epicor_page'
 
 
 const font = Poppins({
@@ -15,31 +15,15 @@ const font = Poppins({
 
 
 
-const Home = ({carousel_odoo} : any) => {
+const Home = () => {
   return (
     <main className={`flex min-h-screen bg-white flex-col items-center justify-between text-[#204E62] ${font.className}`}>
       <NavbarSecond />
-      <OdooPage data={carousel_odoo}/>
-      <OdooSecondPage />
+      <EpicorPage />
+      <EpicorSecondPage />
       <Footer />
     </main>
   )
-}
-
-export const getServerSideProps = async () => {
-  const query_carousel_odoo= groq`
-    *[_type == "carousel_odoo"] {
-      title,
-      desc,
-      "imgurl": image.asset->url
-    }
-  `
-
-const carousel_odoo = await client.fetch(query_carousel_odoo);
-
-  return {
-    props: { carousel_odoo }
-  }
 }
 
 export default Home
