@@ -13,6 +13,7 @@ import Partners from '../components/partners'
 import Gallery from '../components/gallery'
 import Contact from '../components/contact'
 import Footer from '../components/footer'
+import Head from 'next/head'
 
 
 const font = Poppins({
